@@ -22,30 +22,32 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText empcode, passwd;
-    private Button loginbtn;
+public class Verify extends AppCompatActivity implements View.OnClickListener {
+    private EditText empcode, passwd ,confpwd;
+    private Button verifybtn;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_verify);
+
         empcode = (EditText) findViewById(R.id.emp_code);
         passwd = (EditText) findViewById(R.id.pwd);
-        loginbtn = (Button) findViewById(R.id.login);
+        confpwd =(EditText) findViewById(R.id.cpwd);
+        verifybtn = (Button) findViewById(R.id.verify);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
-        loginbtn.setOnClickListener(this);
+        verifybtn.setOnClickListener(this);
     }
-
-    private void userLogin() {
+    private void userVerify() {
         final String employeecode = empcode.getText().toString().trim();
         final String password = passwd.getText().toString().trim();
+        final String conpwd = confpwd.getText().toString().trim();
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
-                Connections.URL_LOGIN,
+                Connections.URL_VERIFY_REGISTER,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -62,13 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 user.getString("f_name"),
                                                 user.getString("l_name")
                                         );
-                                Toast.makeText(getApplicationContext(),"Login Success",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Verified Successfully",Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), HomePage.class));
                                 finish();
-                            } else {
+                            } else if(!obj.getBoolean("success")) {
                                 Toast.makeText(
-                                        getApplicationContext(),
-                                        "Login Failed",
+                                        getApplicationContext(),obj.getString("message"),
                                         Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
@@ -82,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onErrorResponse(VolleyError error) {
                         progressDialog.dismiss();
                         Toast.makeText(
-                                MainActivity.this,
-                                "Login fail",
+                                Verify.this,
+                                "Verification fail",
                                 Toast.LENGTH_LONG).show();
                     }
                 }
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Map<String, String> params = new HashMap<>();
                 params.put("employee_code", employeecode);
                 params.put("password", password);
+                params.put("password_confirmation", conpwd);
                 return params;
             }
         };
@@ -102,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view == loginbtn) {
-            userLogin();
+        if (view == verifybtn) {
+            userVerify();
         }
     }
 }
