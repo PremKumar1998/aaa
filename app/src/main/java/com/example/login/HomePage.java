@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HomePage extends AppCompatActivity {
-    private TextView empcode;
-    private TextView name;
+    private TextView date;
+    private TextView day;
 
     private ProgressDialog progressDialog;
 
@@ -40,10 +40,10 @@ public class HomePage extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
 
-        empcode=findViewById(R.id.code);
-        name=findViewById(R.id.name);
+        date=findViewById(R.id.date);
+        day=findViewById(R.id.day);
 
-        home(empcode,name);
+        home(date,day);
 
 
        // empcode.setText(SharedPrefManager.getInstance(this).getEmpcode());
@@ -57,21 +57,26 @@ public class HomePage extends AppCompatActivity {
                 Request.Method.GET,
                 Connections.URL_HOME,
                 new Response.Listener<String>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         try {
+                            StringBuilder b1= new StringBuilder();
+                            StringBuilder b2= new StringBuilder();
                             JSONObject obj = new JSONObject(response);
                             if (obj.getBoolean("success")) {
                                 //empcode.setText(obj.getString("date"));
                                 JSONArray user =obj.getJSONArray("weekly_hrs");
                                 for(int i=0;i<user.length();i++) {
                                     JSONObject a= user.getJSONObject(i);
-                                    empcode.setText(a.getString("date"));
-                                    name.setText(a.getString("day"));
+                                    b1.append(a.getString("date"));
+                                    b1.append("\n");
+                                    b2.append(a.getString("day"));
+                                    b2.append("\n");
                                     // name.setText(user.getString("f_name")+' '+user.getString("l_name"));
                                 }
+                                date.setText(b1.toString());
+                                day.setText(b2.toString());
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
