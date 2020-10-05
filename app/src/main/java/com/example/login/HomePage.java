@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +27,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomePage extends AppCompatActivity {
-    private TextView date;
-    private TextView day;
 
+public class HomePage extends AppCompatActivity implements View.OnClickListener {
+    private TextView date;
+    private TextView dummy;
+    private TextView day;
+    private TextView dur;
     private ProgressDialog progressDialog;
 
     @Override
@@ -42,15 +45,18 @@ public class HomePage extends AppCompatActivity {
 
         date=findViewById(R.id.date);
         day=findViewById(R.id.day);
+        dur=findViewById(R.id.dur);
+        dummy=findViewById(R.id.dummy);
+        dummy.setOnClickListener(this);
 
-        home(date,day);
+        home(date,day,dur);
 
 
        // empcode.setText(SharedPrefManager.getInstance(this).getEmpcode());
         //name.setText(SharedPrefManager.getInstance(this).getUsername());
     }
 
-    private void home(final TextView empcode, final TextView name) {
+    private void home(final TextView date, final TextView day, final TextView dur) {
        final String token = SharedPrefManager.getInstance(this).getToken();
         progressDialog.show();
         StringRequest getRequest = new StringRequest(
@@ -63,6 +69,9 @@ public class HomePage extends AppCompatActivity {
                         try {
                             StringBuilder b1= new StringBuilder();
                             StringBuilder b2= new StringBuilder();
+                            StringBuilder b3= new StringBuilder();
+
+                            //StringBuilder b2= new StringBuilder();
                             JSONObject obj = new JSONObject(response);
                             if (obj.getBoolean("success")) {
                                 //empcode.setText(obj.getString("date"));
@@ -73,10 +82,13 @@ public class HomePage extends AppCompatActivity {
                                     b1.append("\n");
                                     b2.append(a.getString("day"));
                                     b2.append("\n");
+                                    b3.append(a.getString("duration"));
+                                    b3.append("\n");
                                     // name.setText(user.getString("f_name")+' '+user.getString("l_name"));
                                 }
                                 date.setText(b1.toString());
                                 day.setText(b2.toString());
+                                dur.setText(b3.toString());
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
@@ -127,6 +139,13 @@ public class HomePage extends AppCompatActivity {
             break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == dummy){
+            startActivity(new Intent(getApplicationContext(), Dumy.class));
+        }
     }
 }
 
