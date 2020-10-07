@@ -33,6 +33,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     private TextView dummy;
     private TextView day;
     private TextView dur;
+    private TextView master;
     private ProgressDialog progressDialog;
 
     @Override
@@ -48,6 +49,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         dur=findViewById(R.id.dur);
         dummy=findViewById(R.id.dummy);
         dummy.setOnClickListener(this);
+
+        master=findViewById(R.id.master);
+        master.setOnClickListener(this);
 
         home(date,day,dur);
 
@@ -145,6 +149,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View view) {
         if (view == dummy){
             startActivity(new Intent(getApplicationContext(), Dumy.class));
+        }
+        else if(view == master){
+            startActivity(new Intent(getApplicationContext(), MasterPage.class));
         }
     }
 }

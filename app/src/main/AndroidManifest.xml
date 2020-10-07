@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Dumy"></activity>
+        <activity android:name=".MasterPage"></activity>
+        <activity android:name=".Dumy" />
         <activity android:name=".Verify" />
         <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">
