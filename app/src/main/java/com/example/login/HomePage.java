@@ -29,6 +29,7 @@ import java.util.Map;
 
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
+    private TextView dept;
     private TextView date;
     private TextView dummy;
     private TextView day;
@@ -43,7 +44,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
-
+        dept=findViewById(R.id.dept);
         date=findViewById(R.id.date);
         day=findViewById(R.id.day);
         dur=findViewById(R.id.dur);
@@ -53,14 +54,14 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         master=findViewById(R.id.master);
         master.setOnClickListener(this);
 
-        home(date,day,dur);
+        home(dept,date,day,dur);
 
 
        // empcode.setText(SharedPrefManager.getInstance(this).getEmpcode());
         //name.setText(SharedPrefManager.getInstance(this).getUsername());
     }
 
-    private void home(final TextView date, final TextView day, final TextView dur) {
+    private void home(final TextView dept,final TextView date, final TextView day, final TextView dur) {
        final String token = SharedPrefManager.getInstance(this).getToken();
         progressDialog.show();
         StringRequest getRequest = new StringRequest(
@@ -78,6 +79,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
                             //StringBuilder b2= new StringBuilder();
                             JSONObject obj = new JSONObject(response);
                             if (obj.getBoolean("success")) {
+                                dept.setText(obj.getString("department"));
                                 //empcode.setText(obj.getString("date"));
                                 JSONArray user =obj.getJSONArray("weekly_hrs");
                                 for(int i=0;i<user.length();i++) {
