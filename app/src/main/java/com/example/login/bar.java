@@ -31,7 +31,7 @@ public class bar extends AppCompatActivity {
     float barSpace = 0.05f;
     private static String FILE = "mnt/sdcard/FirstPdf.pdf";
     float groupSpace = 0.3f;
-    List<String> log = new ArrayList<>();
+    List<Log> log = new ArrayList<>();
     String date = new String();
     List<Date> dateList = new ArrayList<>();
     String resp = new String();

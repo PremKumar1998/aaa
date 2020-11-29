@@ -30,7 +30,11 @@ public class test extends AppCompatActivity {
     float barSpace = 0.05f;
     private static String FILE = "mnt/sdcard/FirstPdf.pdf";
     float groupSpace = 0.3f;
-    List<String> log = new ArrayList<>();
+
+    String respid = new String();
+    String datee = new String();
+    int dur;
+    List<Log> logList = new ArrayList<>();
     String date = new String();
     List<bar.Date> dateList = new ArrayList<>();
     String resp = new String();
@@ -97,7 +101,15 @@ public class test extends AppCompatActivity {
                                     date=a.getString("date");
                                     dateList.add(new bar.Date(date));
                                 }
-                                textView.setText("resp: "+dateList.get(0).date);
+                                JSONArray user2 =obj.getJSONArray("tlog");
+                                for(int i=0;i<user2.length();i++) {
+                                    JSONObject a= user2.getJSONObject(i);
+                                    respid = a.getString("responsibility_id");
+                                    datee = a.getString("date");
+                                    dur = a.getInt("dur_total");
+                                    logList.add(new Log(respid,datee,dur));
+                                }
+                                textView.setText("RespId: "+logList.get(1).respid+" \nDate: "+logList.get(1).datee+" \nDuration: "+logList.get(1).dur);
                                 //textView.setText("resp: "+respp.get(i).resp);
                                 //textView.setText(b1.toString());
                             } else {
