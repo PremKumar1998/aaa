@@ -125,7 +125,7 @@ public class bar extends AppCompatActivity {
     }
     public static class Date
     {
-        String resp;
+        String date;
         public Date(String date){
             this.date=date;
         }
