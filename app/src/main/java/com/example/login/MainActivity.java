@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //startActivity(new Intent(getApplicationContext(), excel.class));
+
         setContentView(R.layout.activity_main);
         empcode = (EditText) findViewById(R.id.emp_code);
         passwd = (EditText) findViewById(R.id.pwd);
@@ -63,7 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 user.getString("l_name")
                                         );
                                 Toast.makeText(getApplicationContext(),"Login Success",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(), HomePage.class));
+                                startActivity(new Intent(getApplicationContext(), test.class));
+                                //startActivity(new Intent(getApplicationContext(), HomePage.class));
                                 finish();
                             } else {
                                 Toast.makeText(

@@ -40,6 +40,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home_page);
 
         progressDialog = new ProgressDialog(this);
@@ -138,6 +139,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id= item.getItemId();
         switch(id) {
+           // case R.id.menuReport:
+           //     startActivity(new Intent(this,ReportGeneration.class));;
+
             case R.id.menuLogout:
                 SharedPrefManager.getInstance(this).logout();
                 finish();

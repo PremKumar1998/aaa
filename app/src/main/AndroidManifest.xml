@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MasterPage"></activity>
+        <activity android:name=".test"></activity>
+        <activity android:name=".bar" />
+        <activity android:name=".excel" />
+        <activity android:name=".MasterPage" />
         <activity android:name=".Dumy" />
         <activity android:name=".Verify" />
         <activity android:name=".HomePage" />
@@ -23,6 +26,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.login.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>
