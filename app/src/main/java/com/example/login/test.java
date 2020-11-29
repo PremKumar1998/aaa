@@ -96,9 +96,8 @@ public class test extends AppCompatActivity {
                                     JSONObject a= user1.getJSONObject(i);
                                     date=a.getString("date");
                                     dateList.add(new bar.Date(date));
-
-                                    //textView.setText("resp: "+respp.get(i).resp);
                                 }
+                                textView.setText("resp: "+dateList.get(0).date);
                                 //textView.setText("resp: "+respp.get(i).resp);
                                 //textView.setText(b1.toString());
                             } else {
