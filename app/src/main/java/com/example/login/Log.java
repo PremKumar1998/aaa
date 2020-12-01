@@ -1,9 +1,9 @@
 package com.example.login;
 
 public class Log {
-    public String respnamee;
-    public String datee;
-    public int dur;
+    public String respnamee= null;
+    public String datee =null;
+    public int dur = 0;
 
 
     public Log(String respnamee, String datee, int dur) {

@@ -15,6 +15,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 public class test extends AppCompatActivity {
-    private static final String TAG = "TAG";
+   /* private static final String TAG = "TAG";
     float barSpace = 0.05f;
     private static String FILE = "mnt/sdcard/FirstPdf.pdf";
     float groupSpace = 0.3f;
@@ -40,38 +46,30 @@ public class test extends AppCompatActivity {
     String respname = new String();
     int respid1;
     List<bar.Resp> respList= new ArrayList<>();
+
+    List<String> respList2 = new ArrayList<>();
+    List<String> dateList2 = new ArrayList<>();
+
     TextView textView;
     BarChart barChart;
-    Button switchChart,export;
+    Button switchChart,export;*/
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        textView= findViewById(R.id.text);
+        //textView= findViewById(R.id.text);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
-        barChart = findViewById(R.id.bar_chart);
+        //barChart = findViewById(R.id.bar_chart);
         //progressBar = findViewById(R.id.progress_circular);
-        switchChart = findViewById(R.id.switchChart);
-        export=findViewById(R.id.switchChart2);
-        getChartData(textView);
+        //switchChart = findViewById(R.id.switchChart1);
+        //export=findViewById(R.id.switchChart2);
+        //getChartData(textView);
 
-        /*switchChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getChartData(switchChart.getText().toString());
-            }
-        });
-        export.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // export_pdf();
-            }
-        });*/
     }
-    private void getChartData(final TextView textView) {
+    /*private void getChartData(final TextView type) {
         final String token = SharedPrefManager.getInstance(this).getToken();
         progressDialog.show();
         StringRequest getRequest = new StringRequest(
@@ -94,7 +92,7 @@ public class test extends AppCompatActivity {
                                     respid1 = a.getInt("id");
                                     respname=a.getString("resp_name");
                                     respList.add(new bar.Resp(respid1,respname));
-
+                                    respList2.add(respname);
                                     //textView.setText("resp: "+respp.get(i).resp);
                                 }
                                 JSONArray user1 =obj.getJSONArray("dates");
@@ -102,6 +100,7 @@ public class test extends AppCompatActivity {
                                     JSONObject a= user1.getJSONObject(i);
                                     date=a.getString("date");
                                     dateList.add(new bar.Date(date));
+                                    dateList2.add(date);
                                 }
                                 JSONArray user2 =obj.getJSONArray("tlog");
                                 for(int i=0;i<user2.length();i++) {
@@ -122,8 +121,8 @@ public class test extends AppCompatActivity {
                                     dur = a.getInt("dur_total");
                                     logList.add(new Log(respnamee,datee,dur));
                                 }
-                                //textView.setText("RespId: "+respList.get(0).id+" \nName: "+respList.get(0).resp);
-                                textView.setText("RespName: "+logList.get(0).respnamee+" \nDate: "+logList.get(0).datee+" \nDuration: "+logList.get(0).dur);
+                                textView.setText("RespId: "+dateList2.get(6));
+                                //textView.setText("RespName: "+logList.get(0).respnamee+" \nDate: "+logList.get(0).datee+" \nDuration: "+logList.get(0).dur);
                                 //textView.setText("resp: "+respp.get(i).resp);
                                 //textView.setText(b1.toString());
                             } else {
@@ -158,4 +157,20 @@ public class test extends AppCompatActivity {
 
         RequestHandler.getInstance(this).addToRequestQueue(getRequest);
     }
+    public static class Resp
+    {
+        int id;
+        String resp;
+        public Resp(int id,String resp){
+            this.id=id;
+            this.resp=resp;
+        }
+    }
+    public static class Date
+    {
+        String date;
+        public Date(String date){
+            this.date=date;
+        }
+    }*/
 }

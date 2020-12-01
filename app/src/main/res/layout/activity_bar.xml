@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.login.MainActivity">
+    tools:context="com.example.login.bar">
 
     <Button
-        android:id="@+id/switchChart"
+        android:id="@+id/switchChart1"
         android:layout_width="243dp"
         android:layout_height="58dp"
         android:layout_marginStart="10dp"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/holo_green_dark"
-        android:text="Show Sales/Product"
+        android:text="Show Hours/Responsibility"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -30,7 +30,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/switchChart"
+        android:layout_toRightOf="@id/switchChart1"
         android:background="@android:color/holo_green_dark"
         android:text="Export PDF"
         android:textColor="@android:color/white"
@@ -46,7 +46,7 @@
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bar_chart"
-        android:layout_below="@id/switchChart"
+        android:layout_below="@id/switchChart1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>
