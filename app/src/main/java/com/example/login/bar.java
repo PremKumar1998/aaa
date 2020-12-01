@@ -82,7 +82,7 @@ public class bar extends AppCompatActivity {
                                 for(int i=0;i<user.length();i++) {
                                     JSONObject a= user.getJSONObject(i);
                                     resp=a.getString("date");
-                                    respList.add(new Resp(resp));
+                                    //respList.add(new Resp(resp));
                                 }
                             } else {
                                 Toast.makeText(
@@ -118,8 +118,10 @@ public class bar extends AppCompatActivity {
     }
     public static class Resp
     {
+        int id;
         String resp;
-        public Resp(String resp){
+        public Resp(int id,String resp){
+            this.id=id;
             this.resp=resp;
         }
     }

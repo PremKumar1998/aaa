@@ -1,20 +1,18 @@
 package com.example.login;
 
 public class Log {
-    public String respid;
+    public String respnamee;
     public String datee;
     public int dur;
 
 
-    public Log(String respid, String datee, int dur) {
-        this.respid=respid;
+    public Log(String respnamee, String datee, int dur) {
+        this.respnamee=respnamee;
         this.datee=datee;
         this.dur=dur;
     }
 
-    public String getResp() {
-        return respid;
-    }
+    public String getResp() { return respnamee; }
 
     public String getDate() {
         return datee;

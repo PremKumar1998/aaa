@@ -30,14 +30,15 @@ public class test extends AppCompatActivity {
     float barSpace = 0.05f;
     private static String FILE = "mnt/sdcard/FirstPdf.pdf";
     float groupSpace = 0.3f;
-
-    String respid = new String();
+    String respnamee = new String();
+    int respid2;
     String datee = new String();
     int dur;
     List<Log> logList = new ArrayList<>();
     String date = new String();
     List<bar.Date> dateList = new ArrayList<>();
-    String resp = new String();
+    String respname = new String();
+    int respid1;
     List<bar.Resp> respList= new ArrayList<>();
     TextView textView;
     BarChart barChart;
@@ -90,8 +91,9 @@ public class test extends AppCompatActivity {
                                     JSONObject a= user.getJSONObject(i);
 
                                     //b1.append(a.getString("resp_name"));
-                                    resp=a.getString("resp_name");
-                                    respList.add(new bar.Resp(resp));
+                                    respid1 = a.getInt("id");
+                                    respname=a.getString("resp_name");
+                                    respList.add(new bar.Resp(respid1,respname));
 
                                     //textView.setText("resp: "+respp.get(i).resp);
                                 }
@@ -104,12 +106,24 @@ public class test extends AppCompatActivity {
                                 JSONArray user2 =obj.getJSONArray("tlog");
                                 for(int i=0;i<user2.length();i++) {
                                     JSONObject a= user2.getJSONObject(i);
-                                    respid = a.getString("responsibility_id");
+                                    respid2 = a.getInt("responsibility_id");
+                                    if (respid2==1) {
+                                        respnamee=respList.get(0).resp;
+                                    }
+                                    else if(respid2==2)
+                                    {
+                                        respnamee=respList.get(1).resp;
+                                    }
+                                    else
+                                    {
+                                        respnamee=respList.get(2).resp;
+                                    }
                                     datee = a.getString("date");
                                     dur = a.getInt("dur_total");
-                                    logList.add(new Log(respid,datee,dur));
+                                    logList.add(new Log(respnamee,datee,dur));
                                 }
-                                textView.setText("RespId: "+logList.get(1).respid+" \nDate: "+logList.get(1).datee+" \nDuration: "+logList.get(1).dur);
+                                //textView.setText("RespId: "+respList.get(0).id+" \nName: "+respList.get(0).resp);
+                                textView.setText("RespName: "+logList.get(0).respnamee+" \nDate: "+logList.get(0).datee+" \nDuration: "+logList.get(0).dur);
                                 //textView.setText("resp: "+respp.get(i).resp);
                                 //textView.setText(b1.toString());
                             } else {
