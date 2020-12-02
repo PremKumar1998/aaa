@@ -59,7 +59,7 @@ public class bar extends AppCompatActivity {
 
     List<String> respList2 = new ArrayList<>();
     List<String> dateList2 = new ArrayList<>();
-
+    List<String> dateList3 = new ArrayList<>();
     TextView textView;
     BarChart barChart;
     Button switchChart,export;
@@ -150,6 +150,7 @@ public class bar extends AppCompatActivity {
                                     date=a.getString("date");
                                     dateList.add(new Date(date));
                                     dateList2.add(date);
+                                    dateList3.add(date);
                                 }
                                 JSONArray user2 =obj.getJSONArray("tlog");
                                 for(int i=0;i<user2.length();i++) {
@@ -172,11 +173,11 @@ public class bar extends AppCompatActivity {
                                 }
 
                                 if(type.equals("Show Hours/Responsibility")){
-                                    setBarChart(respList2,dateList2,"responsibility");
+                                    setBarChart(respList2,dateList2,dateList3,"responsibility");
                                     switchChart.setText("Show Hours/Date");
                                 }
                                 else if(type.equals("Show Hours/Date")){
-                                    setBarChart(dateList2,respList2,"date");
+                                    //setBarChart(dateList2,respList2,"date");
                                     switchChart.setText("Show Hours/Responsibility");
                                 }
                                 //textView.setText("RespId: "+respList.get(0).id+" \nName: "+respList.get(0).resp);
@@ -231,7 +232,7 @@ public class bar extends AppCompatActivity {
             this.date=date;
         }
     }
-    private void setBarChart(List<String> dataSets, List<String> groupList, String type) {
+    private void setBarChart(List<String> dataSets, List<String> groupList,List<String> groupList2, String type) {
         int[] MyColors={
                 getResources().getColor(R.color.bar1),
                 getResources().getColor(R.color.bar2),
@@ -251,7 +252,7 @@ public class bar extends AppCompatActivity {
         ArrayList<BarDataSet> arrayList=new ArrayList<>();
         for(int i=0;i<dataSets.size();i++){
             BarDataSet barDataSet;
-            barDataSet = new BarDataSet(barEntries(dataSets.get(i),groupList,type),dataSets.get(i));
+            barDataSet = new BarDataSet(barEntries(dataSets.get(i),groupList,groupList2.get(i),type),dataSets.get(i));
             barDataSet.setColor(MyColors[i]);
             barDataSet.setValueTextSize(5f);
             arrayList.add(barDataSet);
@@ -294,7 +295,7 @@ public class bar extends AppCompatActivity {
         barChart.invalidate();
     }
 
-    private List<BarEntry> barEntries(String groupName, List<String> groupList, String type) {
+    private List<BarEntry> barEntries(String groupName, List<String> groupList,String groupList2, String type) {
         ArrayList<BarEntry> arrayList=new ArrayList<>();
         int i=0;
         while (i<groupList.size()){
@@ -305,10 +306,12 @@ public class bar extends AppCompatActivity {
                     i++;
                 }
                 else if(type.equals("responsibility")){
-                    if(l.getResp().equals(groupName)){
-                        BarEntry barEntry=new BarEntry(i,l.getDur());
-                        arrayList.add(barEntry);
-                        i++;
+                    if(l.getResp().equals(groupName)) {
+                        //if (l.getDate().equals(groupList2)) {
+                            BarEntry barEntry = new BarEntry(i, l.getDur());
+                            arrayList.add(barEntry);
+                            i++;
+                        //}
                     }
                 }
             }
